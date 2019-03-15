@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.hyj.demo.processdemo">
+
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <!--像素提高优先级-->
+        <activity
+            android:name=".pxmode.KeepLiveActivity"
+            android:excludeFromRecents="true"
+            android:exported="false"
+            android:finishOnTaskLaunch="false"
+            android:taskAffinity="com.hyj.demo.processdemo1"
+            android:theme="@style/KeepLiveTheme"></activity>
+        <!--jobScheduler-->
+        <service
+            android:name=".jobscheduler.service.AliveJobService"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
+        <!--<service-->
+        <!--android:name=".jobscheduler.AliveJobService"-->
+        <!--android:exported="true"-->
+        <!--android:permission="android.permission.BIND_JOB_SERVICE"-->
+        <!--android:persistent="true"-->
+        <!--android:process="com.hyj.demo.processdemo.jobscheduler.alive_jobservice" />-->
+
+        <!--todo 自己业务保活的Service-->
+        <service
+            android:name=".jobscheduler.service.WorkService"
+            android:exported="true"
+            android:label="Hyj"
+            android:persistent="true"
+            android:process="com.hyj.workservice"></service>
+
+        <service
+            android:name=".alarmmode.AlarmHandlerService"
+            android:process=":newinst" />
+
+        <service android:name=".alarmmode.LocalService" />
+
+        <service
+            android:name=".alarmmode.RemoteService"
+            android:process=":keepalive" />
+
+        <service android:name=".alarmmode.HideForegroundService" />
+
+
+    </application>
+
+</manifest>

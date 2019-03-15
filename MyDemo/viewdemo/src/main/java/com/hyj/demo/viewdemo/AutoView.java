@@ -55,8 +55,9 @@ public class AutoView extends View {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
     }
 
+
     @Override
-    public void layout(int l, int t, int r, int b) {
-        super.layout(l, t, r, b);
+    protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
+        super.onLayout(changed, left, top, right, bottom);
     }
 }

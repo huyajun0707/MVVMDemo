@@ -9,9 +9,15 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/animation" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/jsbridgedemo" />
+            <option value="$PROJECT_DIR$/materialedittext" />
+            <option value="$PROJECT_DIR$/processdemo" />
             <option value="$PROJECT_DIR$/recyclerviewdemo" />
+            <option value="$PROJECT_DIR$/rxjavademo" />
             <option value="$PROJECT_DIR$/toolbardemo" />
+            <option value="$PROJECT_DIR$/toucheventdemo" />
             <option value="$PROJECT_DIR$/viewdemo" />
           </set>
         </option>
