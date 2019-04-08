@@ -1,1 +1,1 @@
-include ':app', ':viewdemo', ':recyclerviewdemo', ':toolbardemo', ':jsbridgedemo', ':animation', ':materialedittext', ':toucheventdemo', ':processdemo', ':rxjavademo'
+include ':app', ':viewdemo', ':recyclerviewdemo', ':toolbardemo', ':jsbridgedemo', ':animation', ':materialedittext', ':toucheventdemo', ':processdemo', ':rxjavademo', ':leakcanarydemo', ':unittestdemo'

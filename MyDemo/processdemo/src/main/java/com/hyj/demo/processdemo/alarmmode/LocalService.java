@@ -108,4 +108,6 @@ public class LocalService extends Service {
         unbindService(connection);
         unregisterReceiver(mScreenReceiver);
     }
+
+
 }
