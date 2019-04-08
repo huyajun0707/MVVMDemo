@@ -3,24 +3,24 @@
   <component name="GradleSettings">
     <option name="linkedExternalProjectsSettings">
       <GradleProjectSettings>
-        <option name="distributionType" value="LOCAL" />
+        <option name="distributionType" value="DEFAULT_WRAPPED" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="gradleHome" value="$APPLICATION_HOME_DIR$/gradle/gradle-4.4" />
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/X5WebDemo" />
             <option value="$PROJECT_DIR$/animation" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/jsbridgedemo" />
-            <option value="$PROJECT_DIR$/leakcanarydemo" />
             <option value="$PROJECT_DIR$/materialedittext" />
             <option value="$PROJECT_DIR$/processdemo" />
             <option value="$PROJECT_DIR$/recyclerviewdemo" />
             <option value="$PROJECT_DIR$/rxjavademo" />
+            <option value="$PROJECT_DIR$/sharedemo" />
             <option value="$PROJECT_DIR$/toolbardemo" />
             <option value="$PROJECT_DIR$/toucheventdemo" />
-            <option value="$PROJECT_DIR$/unittestdemo" />
             <option value="$PROJECT_DIR$/viewdemo" />
+            <option value="$PROJECT_DIR$/x5demo" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
