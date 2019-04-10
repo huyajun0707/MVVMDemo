@@ -20,7 +20,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity"
+            android:name=".ScalableViewActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:windowSoftInputMode="stateHidden|adjustResize">
             <intent-filter>
@@ -29,7 +29,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <!--Tbs视频播放器-->
+        <!-- Tbs视频播放器 -->
         <activity
             android:name="com.tencent.smtt.sdk.VideoActivity"
             android:alwaysRetainTaskState="true"
@@ -38,6 +38,7 @@
             android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="com.tencent.smtt.tbs.video.PLAY" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
@@ -45,7 +46,8 @@
         <activity
             android:name=".FilechooserActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
-            android:label="@string/app_name"></activity>
+            android:label="@string/app_name" />
+        <!--<activity android:name=".ScalableViewActivity"></activity>-->
     </application>
 
 </manifest>

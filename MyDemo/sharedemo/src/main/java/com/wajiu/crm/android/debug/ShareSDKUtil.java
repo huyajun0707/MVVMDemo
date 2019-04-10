@@ -101,6 +101,7 @@ public class ShareSDKUtil {
                         shareToWechat(activity, shareType, path, WechatMoments.NAME);
                         break;
                 }
+                //TODO
 //                sharePopuWindow.dismiss();
             }
         });
