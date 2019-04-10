@@ -1,4 +1,4 @@
-package com.hyj.load.sharedemo;
+package com.wajiu.crm.android.debug;
 
 import android.app.Application;
 
