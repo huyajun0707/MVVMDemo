@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="DownloadProgressView">
+        <attr name="progress" format="integer" />
+        <attr name="progressColor" format="color" />
+        <attr name="borderColor" format="color" />
+
+    </declare-styleable>
+
+
+</resources>
