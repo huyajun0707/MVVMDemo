@@ -102,7 +102,7 @@ public class ShareSDKUtil {
                         break;
                 }
                 //TODO
-//                sharePopuWindow.dismiss();
+                sharePopuWindow.dismiss();
             }
         });
         //显示窗口
