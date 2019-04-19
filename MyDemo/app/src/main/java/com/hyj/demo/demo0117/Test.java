@@ -1,8 +1,15 @@
 package com.hyj.demo.demo0117;
 
+import android.provider.ContactsContract;
+import android.text.TextUtils;
 import android.util.Log;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.SimpleTimeZone;
 
 /**
  * =========================================================
@@ -47,10 +54,20 @@ public class Test {
 //        });
 //        thread1.start();
 //        thread2.start();
+        HashMap hashMap = new HashMap();
+        hashMap.put(null,"000");
+        System.out.print(hashMap.get(null));
 
 
     }
 
+    public static String getServiceTimeFrorMH(String time) {
+        if (!TextUtils.isEmpty(time) && time.contains("T")) {
+            return time.replace("T", "  ");
+        }
+
+        return time;
+    }
 
 
 }
