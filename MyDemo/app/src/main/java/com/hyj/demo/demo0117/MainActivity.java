@@ -13,12 +13,17 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.TextView;
 
 import java.io.File;
 import java.lang.reflect.Array;
 import java.lang.reflect.Field;
 import java.security.PrivateKey;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -31,6 +36,7 @@ import okio.Source;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
+    private TextView tvTest;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +53,10 @@ public class MainActivity extends AppCompatActivity {
                 thread2.start();
             }
         });
+        tvTest = findViewById(R.id.tvTest);
+        tvTest.setText("0000");
+
+
 //        startActivity();
 
 //        Handler handler = new Handler(){
@@ -205,5 +215,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onStop() {
         super.onStop();
         Log.d(TAG, "onStop: ");
+    }
+
+
+    private void map(){
+        //同步
+        Map<String,String > map = Collections.synchronizedMap(new HashMap<String, String>());
+     //   ConcurrentHashMap
+    //concurrentHashMap的put方法是加锁的    采用了ReentrantLock可重入锁），可以保证线程安全。
     }
 }

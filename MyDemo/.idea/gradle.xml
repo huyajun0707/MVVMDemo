@@ -12,6 +12,7 @@
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/dialogview" />
             <option value="$PROJECT_DIR$/greendaodemo" />
+            <option value="$PROJECT_DIR$/hongbaodemo" />
             <option value="$PROJECT_DIR$/jsbridgedemo" />
             <option value="$PROJECT_DIR$/materialedittext" />
             <option value="$PROJECT_DIR$/processdemo" />
@@ -21,6 +22,7 @@
             <option value="$PROJECT_DIR$/toolbardemo" />
             <option value="$PROJECT_DIR$/toucheventdemo" />
             <option value="$PROJECT_DIR$/viewdemo" />
+            <option value="$PROJECT_DIR$/viewpagerdemo" />
             <option value="$PROJECT_DIR$/x5demo" />
           </set>
         </option>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--accessibilityEventTypes  窗体事件监听类型
+    accessibilityFeedbackType 接收事件的类型
+    packageNames  要监听的应用包名-->
+<accessibility-service xmlns:android="http://schemas.android.com/apk/res/android"
+    android:accessibilityEventTypes="typeWindowStateChanged|typeWindowContentChanged|typeNotificationStateChanged"
+    android:accessibilityFeedbackType="feedbackAllMask"
+    android:accessibilityFlags=""
+    android:canRetrieveWindowContent="true"
+    android:description="@string/app_name"
+    android:notificationTimeout="10"
+    android:packageNames="com.tencent.mm">
+
+</accessibility-service>
