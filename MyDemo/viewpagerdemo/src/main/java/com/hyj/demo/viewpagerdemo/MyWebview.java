@@ -76,6 +76,6 @@ public class MyWebview extends WebView {
     @Override
     protected void onOverScrolled(int scrollX, int scrollY, boolean clampedX, boolean clampedY) {
         super.onOverScrolled(scrollX, scrollY, clampedX, clampedY);
-        isScrollY = clampedY || clampedX;
+        isScrollY = clampedY || clampedX;//
     }
 }
