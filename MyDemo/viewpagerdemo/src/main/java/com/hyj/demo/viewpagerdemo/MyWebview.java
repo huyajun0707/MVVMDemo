@@ -43,19 +43,18 @@ public class MyWebview extends WebView {
             switch (event.getAction()) {
                 case MotionEvent.ACTION_DOWN:
                     isScrollY = false;
-//                    getViewPager(this).requestDisallowInterceptTouchEvent(true);
-                    getParent().getParent().requestDisallowInterceptTouchEvent(true);
+                    requestDisallowInterceptTouchEvent(true);
                     break;
                 case MotionEvent.ACTION_MOVE:
-                    getParent().getParent().requestDisallowInterceptTouchEvent(isScrollY);
+                    requestDisallowInterceptTouchEvent(!isScrollY);
                     break;
                 default:
-                    getParent().getParent().requestDisallowInterceptTouchEvent(false);
+                    requestDisallowInterceptTouchEvent(false);
                     break;
 
             }
         } else {
-            getParent().getParent().requestDisallowInterceptTouchEvent(true);
+            requestDisallowInterceptTouchEvent(true);
         }
 
         return super.onTouchEvent(event);
@@ -77,6 +76,6 @@ public class MyWebview extends WebView {
     @Override
     protected void onOverScrolled(int scrollX, int scrollY, boolean clampedX, boolean clampedY) {
         super.onOverScrolled(scrollX, scrollY, clampedX, clampedY);
-        isScrollY = clampedY;
+        isScrollY = clampedY || clampedX;
     }
 }

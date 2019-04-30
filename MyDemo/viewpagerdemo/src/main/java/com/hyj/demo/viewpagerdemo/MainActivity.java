@@ -7,7 +7,9 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,10 +20,12 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
 
     List<Fragment> fragments = new ArrayList<>();
     List<String> titles = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);tabLayout = findViewById(R.id.tl_tabs);
+        setContentView(R.layout.activity_main);
+        tabLayout = findViewById(R.id.tl_tabs);
         viewPager = findViewById(R.id.vp_content);
 
         fragments.add(MyFragment2.newInstance("11111", "11111"));
@@ -76,5 +80,23 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
     @Override
     public void onPageScrollStateChanged(int state) {
 
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
+//            if (fragment instanceof RechargeSuccessFragment
+//                    || fragment instanceof HuifuWithdrawalSuccessFragment) {
+//                finish();
+//            } else {
+            popBackStack();
+//            }
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
+    public void popBackStack() {
+        Toast.makeText(this, "是否返回", Toast.LENGTH_SHORT).show();
     }
 }
