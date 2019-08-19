@@ -12,11 +12,11 @@ package com.hyj.demo.demo0117;
 public class SortTest {
     public static void main(String[] args) {
         int[] nums = new int[]{1, 2, 0, 5, 4, 3, 9, 8, 6, 7};
-//        shellSort(nums);
-//        insertSort(nums);
-//        bubbleSort(nums);
+        //        shellSort(nums);
+        //        insertSort(nums);
+        //        bubbleSort(nums);
         quickSort(nums, 0, nums.length - 1);
-//        selectSort(nums);
+        //        selectSort(nums);
         for (int i = 0; i < nums.length; i++) {
             System.out.print(nums[i] + ",");
         }
@@ -104,8 +104,10 @@ public class SortTest {
         }
         nums[start] = key;
         //递归
-        if (start > low) quickSort(nums, low, start - 1);//左边序列。第一个索引位置到关键值索引-1
-        if (end < high) quickSort(nums, start + 1, high);//右边序列。从关键值索引+1到最后一个
+        if (start > low)
+            quickSort(nums, low, start - 1);//左边序列。第一个索引位置到关键值索引-1
+        if (end < high)
+            quickSort(nums, start + 1, high);//右边序列。从关键值索引+1到最后一个
 
     }
 

@@ -10,6 +10,7 @@ public class Main2Activity extends AppCompatActivity {
     ValueAnimator valueAnimator;
     private boolean isFirst = true;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

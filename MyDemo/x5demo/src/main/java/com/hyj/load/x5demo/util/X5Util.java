@@ -15,6 +15,7 @@ import com.tencent.smtt.export.external.interfaces.IX5WebChromeClient;
 import com.tencent.smtt.export.external.interfaces.JsResult;
 import com.tencent.smtt.sdk.DownloadListener;
 import com.tencent.smtt.sdk.QbSdk;
+import com.tencent.smtt.sdk.TbsListener;
 import com.tencent.smtt.sdk.TbsVideo;
 import com.tencent.smtt.sdk.WebChromeClient;
 import com.tencent.smtt.sdk.WebSettings;
@@ -69,6 +70,23 @@ public class X5Util {
         };
         //x5内核初始化接口
         QbSdk.initX5Environment(context, cb);
+        //X5内核下载进度
+//        QbSdk.setTbsListener(new TbsListener() {
+//            @Override
+//            public void onDownloadFinish(int i) {
+//
+//            }
+//
+//            @Override
+//            public void onInstallFinish(int i) {
+//
+//            }
+//
+//            @Override
+//            public void onDownloadProgress(int i) {
+//
+//            }
+//        });
     }
 
     public void setWebSettings(WebSettings webSetting) {

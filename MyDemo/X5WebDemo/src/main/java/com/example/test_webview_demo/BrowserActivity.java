@@ -529,4 +529,6 @@ public class BrowserActivity extends Activity {
 		}
 	};
 
+
+
 }

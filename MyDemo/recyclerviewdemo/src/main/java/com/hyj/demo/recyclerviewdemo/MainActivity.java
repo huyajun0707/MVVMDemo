@@ -1,10 +1,13 @@
 package com.hyj.demo.recyclerviewdemo;
 
 import android.animation.ValueAnimator;
+import android.annotation.TargetApi;
+import android.os.Build;
 import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -37,10 +40,10 @@ public class MainActivity extends AppCompatActivity {
                     Log.e("下载", "进度" + downloadInfo.getProgress());
                     for (int i = 0; i < data.size(); i++) {
                         for (int j = 0; j < data.get(i).getBooks().size(); j++) {
-                            if (downloadInfo.getTypeId() == data.get(i).getBooks().get(j).getTypeId()
-                                    && downloadInfo.getBookId() == data.get(i).getBooks().get(j).getBookId()) {
+                            if (downloadInfo.getTypeId() == data.get(i).getBooks().get(j).getTypeId() && downloadInfo.getBookId() == data.get(i).getBooks().get(j).getBookId()) {
                                 data.get(i).getBooks().get(j).setProgress(downloadInfo.getProgress());
-                                Log.d("更改当前进度", "typeId:" + downloadInfo.getTypeId() + ",bookId:" + downloadInfo.getBookId() +"--->"+ downloadInfo.getProgress());
+                                Log.d("更改当前进度",
+                                        "typeId:" + downloadInfo.getTypeId() + ",bookId:" + downloadInfo.getBookId() + "--->" + downloadInfo.getProgress());
                                 autoAdapter1.getAutoAdapter2s().get(i).notifyItemChanged(j);
                             }
                         }
@@ -63,29 +66,32 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemButtonClick(final Book book, int position) {
                 //去下载某一本数  此处模拟去更新某个进度
-//                executorService.execute(new Runnable() {
-//                    @Override
-//                    public void run() {
+                //                executorService.execute(new Runnable() {
+                //                    @Override
+                //                    public void run() {
                 final DownloadInfo downloadInfo = new DownloadInfo();
                 downloadInfo.setTypeId(book.getTypeId());
                 downloadInfo.setBookId(book.getBookId());
                 Log.e("开启", "下载");
-                ValueAnimator valueAnimator = ValueAnimator.ofInt(0, 100);
-                valueAnimator.setDuration(10000);
-                valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-                    @Override
-                    public void onAnimationUpdate(ValueAnimator animation) {
-                        Integer value = (Integer) animation.getAnimatedValue();
-                        downloadInfo.setProgress(value);
-                        Message message = Message.obtain();
-                        message.what = 100;
-                        message.obj = downloadInfo;
-                        handler.sendMessage(message);
-                    }
-                });
-                valueAnimator.start();
-//                    }
-//                });
+                ValueAnimator valueAnimator = null;
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+                    valueAnimator = ValueAnimator.ofInt(0, 100);
+                    valueAnimator.setDuration(10000);
+                    valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                        @Override
+                        public void onAnimationUpdate(ValueAnimator animation) {
+                            Integer value = (Integer) animation.getAnimatedValue();
+                            downloadInfo.setProgress(value);
+                            Message message = Message.obtain();
+                            message.what = 100;
+                            message.obj = downloadInfo;
+                            handler.sendMessage(message);
+                        }
+                    });
+                    valueAnimator.start();
+                }
+                //                    }
+                //                });
             }
         });
         recyclerView.setLayoutManager(new LinearLayoutManager(this));

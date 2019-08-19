@@ -46,6 +46,8 @@ public class MainActivity extends AppCompatActivity {
 ////        String numberFormat = String.format("%.2f", number);
 //        String numberFormat = String.format(Locale.CHINA, "%.2f", number);
 //        Log.e("number", numberFormat);
+        TextView textView = findViewById(R.id.tvTest);
+        textView.invalidate();
         findViewById(R.id.tvTest).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
