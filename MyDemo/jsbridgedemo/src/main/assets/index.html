@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+<head> <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>js交互演示</title>
+
+    <!--JS代码-->
+    <script>
+    <!--Android需要调用的方法-->
+    function callJs(str){
+
+	    alert("Android调用了JS的callJS方法！来自"+str);
+	   return str;
+	}
+
+	function callAndroid(){
+    <!--约定的url协议为：js://webview?arg1=111&arg2=222-->
+        document.location = "js://webview?param="+"{\"method\":\"goActivity\",\"params\":\"具体参数\"}";
+     }
+
+	</script>
+
+</head>
+
+<body>
+    <b>测试</b><br/>
+    <button onClick="window.android.goActivity()">
+    跳转Activity
+    </button><br/>
+    <button  onclick="callAndroid()">点击调用Android代码</button>
+</body>
+
+</html>
