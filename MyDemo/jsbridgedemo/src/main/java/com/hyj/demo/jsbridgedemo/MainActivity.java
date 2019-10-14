@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.webkit.JavascriptInterface;
+import android.webkit.JsPromptResult;
 import android.webkit.JsResult;
 import android.webkit.ValueCallback;
 import android.webkit.WebChromeClient;
@@ -96,15 +97,17 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 Uri uri = Uri.parse(url);
-                Log.d("--->", "shouldOverrideUrlLoading:"+url);
+                Log.d("--->", "shouldOverrideUrlLoading:" + url);
                 if (uri.getScheme().equals("js")) {
                     String param = uri.getQueryParameter("param");
                     try {
                         JSONObject jsonObject = new JSONObject(param);
                         String method = jsonObject.getString("method");
-                        switch (method){
+                        switch (method) {
                             case "goActivity":
                                 startActivity(new Intent(MainActivity.this, JsBridgeActivity.class));
+                                break;
+                            default:
                                 break;
                         }
 
@@ -113,15 +116,42 @@ public class MainActivity extends AppCompatActivity {
                     }
 
 
-                } else
+                } else {
                     view.loadUrl(url);
+                }
 
                 return true;
 
             }
         });
 
+        //js调用本地方法，通过prompt拦截
+        webView.setWebChromeClient(new WebChromeClient() {
+            @Override
+            public boolean onJsPrompt(WebView view, String url, String message, String defaultValue, JsPromptResult result) {
+                Uri uri = Uri.parse(message);
+                if (uri.getScheme().equals("js")) {
+                    String param = uri.getQueryParameter("param");
+                    try {
+                        JSONObject jsonObject = new JSONObject(param);
+                        String method = jsonObject.getString("method");
+                        switch (method) {
+                            case "goActivity":
+                                startActivity(new Intent(MainActivity.this, JsBridgeActivity.class));
+                                String ret = "js调用了native,这是返回结果";
+                                result.confirm(ret);
+                                return true;
+                            default:
+                                break;
+                        }
 
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+                return super.onJsPrompt(view, url, message, defaultValue, result);
+            }
+        });
     }
 
     //本地方法

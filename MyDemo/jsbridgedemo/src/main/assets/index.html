@@ -17,6 +17,11 @@
     <!--约定的url协议为：js://webview?arg1=111&arg2=222-->
         document.location = "js://webview?param="+"{\"method\":\"goActivity\",\"params\":\"具体参数\"}";
      }
+     function callAppByPrompt(){
+         var result=prompt("js://webview?param="+"{\"method\":\"goActivity\",\"params\":\"具体参数\"}"); 
+         alert("demo " + result);
+      }  
+
 
 	</script>
 
@@ -27,7 +32,9 @@
     <button onClick="window.android.goActivity()">
     跳转Activity
     </button><br/>
-    <button  onclick="callAndroid()">点击调用Android代码</button>
+    <button  onclick="callAndroid()">点击通过shouldloadurl调用Android代码</button><br/>
+    <button  onclick="callAppByPrompt()">点击通过Prompt调用Android代c</button><br/>
+<!--    <p id="content">显示返回值</p>-->
 </body>
 
 </html>
