@@ -2,6 +2,8 @@ package com.hyj.demo.jsbridgedemo;
 
 import android.annotation.SuppressLint;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -39,7 +41,9 @@ public class JsBridgeActivity extends AppCompatActivity {
             @Override
             public void handler(String data, CallBackFunction function) {
                 Log.i("---->", "handler = callApp, data from web = " + data);
+                startActivity(new Intent(JsBridgeActivity.this, BridgeForPormptActivity.class));
                 function.onCallBack("callApp exe, response data 测试 from Java");
+
             }
 
         });

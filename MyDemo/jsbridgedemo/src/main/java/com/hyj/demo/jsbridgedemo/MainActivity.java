@@ -150,7 +150,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //本地方法
-    public static class NativeJsInterface {
+    public class NativeJsInterface {
         @JavascriptInterface
         public void goActivity() {
             startActivity(new Intent(MainActivity.this, JsBridgeActivity.class));

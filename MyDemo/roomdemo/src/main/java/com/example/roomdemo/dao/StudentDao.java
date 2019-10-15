@@ -21,10 +21,10 @@ import java.util.List;
 public interface StudentDao {
 
     @Query("SELECT * FROM tb_student")
-    LiveData<List<StudentEntity>> getAll();
+    List<StudentEntity> getAll();
 
     @Query("SELECT * FROM tb_student WHERE id IN (:ids)")
-    List<StudentEntity> getAllByIds(long [] ids);
+    List<StudentEntity> getAllByIds(long[] ids);
 
     @Insert
     void insert(StudentEntity... entities);
