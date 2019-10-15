@@ -2,10 +2,8 @@ package com.hyj.demo.jsbridgedemo;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.webkit.JavascriptInterface;
 import android.webkit.WebView;
 
 import com.hyj.demo.jsbridgedemo.bridge.InjectedChromeClient;
@@ -21,7 +19,7 @@ public class BridgeForPormptActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bridge_for_pormpt);
         webView = findViewById(R.id.webview);
-        webView.setWebChromeClient(new MyWebChromClient("native", new MainActivity.NativeJsInterface()));
+        webView.setWebChromeClient(new MyWebChromClient("native", NativeMethod.class));
 
     }
 
@@ -37,12 +35,15 @@ public class BridgeForPormptActivity extends AppCompatActivity {
         }
     }
 
-    //本地方法
-    public static class NativeJsInterface {
+
+    public  static class NativeMethod {
+
         public static void call(final WebView webView, String data) {
             Log.d("---->", "data:" + data);
 
 
         }
     }
+
+
 }
