@@ -1,6 +1,6 @@
 package com.hyj.demo.unittestdemo;
 
-import android.arch.lifecycle.Observer;
+import androidx.lifecycle.Observer;
 import android.util.Log;
 
 import org.junit.Test;

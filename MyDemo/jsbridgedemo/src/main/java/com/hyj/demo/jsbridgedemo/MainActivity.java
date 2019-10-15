@@ -3,8 +3,8 @@ package com.hyj.demo.jsbridgedemo;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -16,11 +16,6 @@ import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-
-import com.github.lzyzsd.jsbridge.BridgeHandler;
-import com.github.lzyzsd.jsbridge.BridgeWebView;
-import com.github.lzyzsd.jsbridge.CallBackFunction;
-import com.github.lzyzsd.jsbridge.WebViewJavascriptBridge;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -155,7 +150,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //本地方法
-    public class NativeJsInterface {
+    public static class NativeJsInterface {
         @JavascriptInterface
         public void goActivity() {
             startActivity(new Intent(MainActivity.this, JsBridgeActivity.class));

@@ -2,12 +2,11 @@ package com.hyj.demo.viewdemo;
 
 import android.content.Context;
 import android.graphics.Rect;
-import android.icu.util.Measure;
-import android.support.annotation.Nullable;
+
+import androidx.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 
 import java.util.ArrayList;
 import java.util.List;

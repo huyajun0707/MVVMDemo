@@ -1,14 +1,11 @@
 package com.hyj.demo.demo0117;
 
 import android.os.Build;
-import android.os.Handler;
-import android.os.Looper;
-import android.os.Message;
 import android.os.PersistableBundle;
-import android.support.annotation.LongDef;
-import android.support.annotation.RequiresApi;
-import android.support.v4.util.Pools;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.LongDef;
+import androidx.annotation.RequiresApi;
+import androidx.core.util.Pools;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -18,21 +15,15 @@ import android.widget.TextView;
 import java.io.File;
 import java.lang.reflect.Array;
 import java.lang.reflect.Field;
-import java.security.PrivateKey;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.Locale;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
 
 
 import dalvik.system.BaseDexClassLoader;
 import dalvik.system.PathClassLoader;
 import okio.BufferedSource;
 import okio.Okio;
-import okio.Source;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";

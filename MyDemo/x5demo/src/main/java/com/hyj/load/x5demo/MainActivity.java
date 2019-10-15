@@ -1,8 +1,8 @@
 package com.hyj.load.x5demo;
 
 import android.content.Intent;
-import android.net.Uri;
-import android.support.v7.app.AppCompatActivity;
+
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -11,8 +11,6 @@ import android.widget.LinearLayout;
 
 import com.hyj.load.x5demo.util.FileUtil;
 import com.hyj.load.x5demo.util.X5Util;
-import com.tencent.smtt.sdk.ValueCallback;
-import com.tencent.smtt.sdk.WebChromeClient;
 import com.tencent.smtt.sdk.WebView;
 import com.tencent.smtt.sdk.WebViewClient;
 

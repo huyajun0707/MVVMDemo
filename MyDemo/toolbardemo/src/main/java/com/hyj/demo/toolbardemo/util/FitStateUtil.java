@@ -4,15 +4,12 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Build;
-import android.support.annotation.ColorInt;
+import androidx.annotation.ColorInt;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
-
-import com.hyj.demo.toolbardemo.R;
-import com.hyj.demo.toolbardemo.entity.City;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;

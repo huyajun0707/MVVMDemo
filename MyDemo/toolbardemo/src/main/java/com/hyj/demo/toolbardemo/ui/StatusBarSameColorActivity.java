@@ -1,6 +1,6 @@
 package com.hyj.demo.toolbardemo.ui;
 
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.hyj.demo.toolbardemo.R;

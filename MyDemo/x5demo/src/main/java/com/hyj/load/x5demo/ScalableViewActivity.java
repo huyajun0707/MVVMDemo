@@ -1,6 +1,6 @@
 package com.hyj.load.x5demo;
 
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.hyj.load.x5demo.util.Utils;

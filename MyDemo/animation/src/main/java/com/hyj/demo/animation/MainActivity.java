@@ -1,13 +1,11 @@
 package com.hyj.demo.animation;
 
-import android.animation.Animator;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.annotation.SuppressLint;
-import android.graphics.Point;
-import android.support.v7.app.AppCompatActivity;
+
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.animation.AnimationSet;
 
 public class MainActivity extends AppCompatActivity {
     private CameraView cameraView;

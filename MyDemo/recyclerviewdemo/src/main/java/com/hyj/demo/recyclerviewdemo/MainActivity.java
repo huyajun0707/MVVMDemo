@@ -1,17 +1,14 @@
 package com.hyj.demo.recyclerviewdemo;
 
 import android.animation.ValueAnimator;
-import android.annotation.TargetApi;
 import android.os.Build;
-import android.os.CountDownTimer;
 import android.os.Handler;
-import android.os.Looper;
 import android.os.Message;
-import android.support.annotation.RequiresApi;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.util.Log;
 
 import com.hyj.demo.recyclerviewdemo.entity.Book;
