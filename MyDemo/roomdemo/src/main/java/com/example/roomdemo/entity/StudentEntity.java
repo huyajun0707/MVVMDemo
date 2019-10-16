@@ -23,7 +23,16 @@ import androidx.room.PrimaryKey;
 public class StudentEntity {
     @PrimaryKey(autoGenerate = true)//定义主键
     private long id;
-//    @ColumnInfo(name = "name")
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
+    //    @ColumnInfo(name = "name")
     private String name;
     @Ignore
     private String ignoreText;
@@ -87,6 +96,7 @@ public class StudentEntity {
                 ", ignoreText='" + ignoreText + '\'' +
                 ", class_id='" + class_id + '\'' +
                 ", sex=" + sex +
+                ", postCode=" + address.getPostCode() +
                 '}';
     }
 }

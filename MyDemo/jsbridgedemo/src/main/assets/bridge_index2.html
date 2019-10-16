@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head> <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>js交互演示</title>
+
+    <!--JS代码-->
+    <script>
+    <!--Android需要调用的方法-->
+    function callJs(str){
+
+	    alert("Android调用了JS的callJS方法！来自"+str);
+	   return str;
+	}
+
+	function callAndroid(str){
+
+       var result =  myApp.call(str);
+          alert("Android调用了JS的call方法！结果"+result);
+       console.log('---->'+result, 'js调用Android成功！');
+     }
+     function callAppByPrompt(){
+         var result=prompt("js://webview?param="+"{\"method\":\"goActivity\",\"params\":\"具体参数\"}"); 
+         alert("demo " + result);
+      }  
+
+
+	</script>
+
+</head>
+
+<body>
+    <b>测试</b><br/>
+<!--    <button onClick="window.android.goActivity()">-->
+<!--    跳转Activity-->
+<!--    </button><br/>-->
+    <button  onclick='callAndroid("{\"method\": \"toast\"}")'>调用Android 方法Call——toast</button><br/>
+    <button  onclick='myApp.call("{\"method\": \"log\"}")'>调用Android 方法Call——log</button><br/>
+    <button  onclick='myApp.show("{\"method\": \"show\"}")'>调用Android 方法show</button><br/>
+<!--    <p id="content">显示返回值</p>-->
+</body>
+
+</html>

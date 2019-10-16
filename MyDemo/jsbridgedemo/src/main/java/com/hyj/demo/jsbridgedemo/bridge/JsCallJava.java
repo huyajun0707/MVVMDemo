@@ -32,27 +32,27 @@ public class JsCallJava {
             }
             mInjectedName = injectedName;
             mMethodsMap = new HashMap<>();
-            StringBuilder builder = new StringBuilder("javascript:(function(b){console.log(\"");
+            StringBuilder builder = new StringBuilder("javascript:(function(global){console.log(\"");
             builder.append(mInjectedName);
-            builder.append(" initialization begin\");var a={queue:[],callback:function(){var d=Array.prototype.slice.call(arguments,0);var c=d.shift();var e=d.shift();this.queue[c].apply(this,d);if(!e){delete this.queue[c]}}};");
+            builder.append(" initialization begin\");var native={queue:[],callback:function(){var args=Array.prototype.slice.call(arguments,0);var index=args.shift();var isPermanent=args.shift();this.queue[index].apply(this,args);if(!isPermanent){delete this.queue[index]}}};");
             for (Method method : injectedCls.getDeclaredMethods()) {
                 String sign;
                 if (method.getModifiers() != (Modifier.PUBLIC | Modifier.STATIC) || (sign = genJavaMethodSign(method)) == null) {
                     continue;
                 }
-                Log.d("---->1", method.getName());
+                Log.d("---->1", sign+"----"+method.getName());
                 mMethodsMap.put(sign, method);
-                builder.append(String.format("a.%s=", method.getName()));
+                builder.append(String.format("native.%s=", method.getName()));
                 Log.d("---->2", builder.toString());
             }
 
-            builder.append("function(){var f=Array.prototype.slice.call(arguments,0);if(f.length<1){throw\"");
+            builder.append("function(){var args=Array.prototype.slice.call(arguments,0);if(args.length<1){throw\"");
             builder.append(mInjectedName);
-            builder.append(" call error, message:miss method name\"}var e=[];for(var h=1;h<f.length;h++){var c=f[h];var j=typeof c;e[e.length]=j;if(j==\"function\"){var d=a.queue.length;a.queue[d]=c;f[h]=d}}var g=JSON.parse(prompt(JSON.stringify({method:f.shift(),types:e,args:f})));if(g.code!=200){throw\"");
+            builder.append(" call error, message:miss method name\"}var aTypes=[];for(var i=1;i<args.length;i++){var arg=args[i];var type=typeof arg;aTypes[aTypes.length]=type;if(type==\"function\"){var index=native.queue.length;native.queue[index]=arg;args[i]=index}}var res=JSON.parse(prompt(JSON.stringify({method:args.shift(),types:aTypes,args:args})));if(res.code!=200){throw\"");
             builder.append(mInjectedName);
-            builder.append(" call error, code:\"+g.code+\", message:\"+g.result}return g.result};Object.getOwnPropertyNames(a).forEach(function(d){var c=a[d];if(typeof c===\"function\"&&d!==\"callback\"){a[d]=function(){return c.apply(a,[d].concat(Array.prototype.slice.call(arguments,0)))}}});b.");
+            builder.append(" call error, code:\"+res.code+\", message:\"+res.result}return res.result};Object.getOwnPropertyNames(native).forEach(function(property){var original=native[property];if(typeof original===\"function\"&&property!==\"callback\"){native[property]=function(){return original.apply(native,[property].concat(Array.prototype.slice.call(arguments,0)))}}});global.");
             builder.append(mInjectedName);
-            builder.append("=a;console.log(\"");
+            builder.append("=native;console.log(\"");
             builder.append(mInjectedName);
             builder.append(" initialization end\")})(window);");
             mPreloadInterfaceJS = builder.toString();

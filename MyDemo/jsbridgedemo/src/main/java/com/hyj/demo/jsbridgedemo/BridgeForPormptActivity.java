@@ -7,6 +7,7 @@ import android.util.Log;
 import android.webkit.WebView;
 
 import com.hyj.demo.jsbridgedemo.bridge.InjectedChromeClient;
+import com.hyj.demo.jsbridgedemo.bridge.InjectedWebviewClient;
 import com.hyj.demo.jsbridgedemo.bridge.JsCallJava;
 
 public class BridgeForPormptActivity extends AppCompatActivity {
@@ -19,8 +20,10 @@ public class BridgeForPormptActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bridge_for_pormpt);
         webView = findViewById(R.id.webview);
-        webView.setWebChromeClient(new MyWebChromClient("native", NativeMethod.class));
-
+        webView.getSettings().setJavaScriptEnabled(true);
+        webView.setWebChromeClient(new MyWebChromClient("myApp", NativeMethod.class));
+        webView.setWebViewClient(new InjectedWebviewClient(this));
+        webView.loadUrl("file:///android_asset/bridge_index2.html");
     }
 
 
@@ -38,7 +41,14 @@ public class BridgeForPormptActivity extends AppCompatActivity {
 
     public  static class NativeMethod {
 
-        public static void call(final WebView webView, String data) {
+        public static String call(final WebView webView, String data) {
+            Log.d("---->", "data:" + data);
+
+            return "{\"result\": \"success\"}";
+
+
+        }
+        public static void show(final WebView webView, String data) {
             Log.d("---->", "data:" + data);
 
 

@@ -12,18 +12,20 @@ import android.util.Log;
 import android.view.View;
 
 import com.example.roomdemo.dao.RoomDemoDatabase;
+import com.example.roomdemo.entity.Address;
 import com.example.roomdemo.entity.StudentEntity;
 
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
+    private int num;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         final RoomDemoDatabase database =  Room.databaseBuilder(getApplicationContext(),
-                RoomDemoDatabase.class, "database_name")//数据库名称
+                RoomDemoDatabase.class, "database_name.db")//数据库名称
                 .addCallback(new RoomDatabase.Callback() {
                     //第一次创建数据库时调用，但是在创建所有表之后调用的
                     @Override
@@ -49,10 +51,15 @@ public class MainActivity extends AppCompatActivity {
                 StudentEntity [] studentEntities = new StudentEntity[10];
 
                 for (int i = 0; i < 10; i++) {
+                    num++;
                     studentEntities[i] = new StudentEntity();
-                    studentEntities[i].setName("小雪"+i+10);
+                    studentEntities[i].setName("小雪"+num);
                     studentEntities[i].setSex(i%2);
-                    studentEntities[i].setIgnoreText("忽略"+i+10);
+                    studentEntities[i].setIgnoreText("忽略"+num);
+                    Address address= new Address();
+                    address.setCity("城市"+num);
+                    address.setPostCode(num);
+                    studentEntities[i].setAddress(address);
                 }
 
                 database.studentDao().insert(studentEntities);

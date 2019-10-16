@@ -46,8 +46,8 @@ public class InjectedChromeClient extends WebChromeClient {
 
     @Override
     public boolean onJsAlert(WebView view, String url, String message, final JsResult result) {
-        result.confirm();
-        return true;
+//        result.confirm();
+        return super.onJsAlert(view,url,message,result);
     }
 
     @Override

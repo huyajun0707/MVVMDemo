@@ -45,7 +45,7 @@ public class JsCallback {
             }
         }
         String execJs = String.format(Constant.CALLBACK_JS_FORMAT, mInjectedName, mIndex, mIsPermanent, builder.toString());
-        Log.d("---->", execJs);
+        Log.d("---->execjs", execJs);
         mWebViewRef.get().loadUrl(execJs);
         mCouldGoOn = mIsPermanent > 0;
     }
