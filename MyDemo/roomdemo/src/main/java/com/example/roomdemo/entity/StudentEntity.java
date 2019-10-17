@@ -15,11 +15,11 @@ import androidx.room.PrimaryKey;
  * @depiction ：
  */
 @Entity(tableName = "tb_student",//表名
-                indices = @Index(value = {"name"}, unique = true))
+                indices = @Index(value = {"name"}, unique = false),
 //        ,//定义索引
-//        foreignKeys = {@ForeignKey(entity = ClassEntity.class,
-//        parentColumns = "id",
-//        childColumns = "class_id")})//定义外键
+        foreignKeys = {@ForeignKey(entity = ClassEntity.class,
+        parentColumns = "id",
+        childColumns = "class_id")})//定义外键
 public class StudentEntity {
     @PrimaryKey(autoGenerate = true)//定义主键
     private long id;
@@ -38,14 +38,22 @@ public class StudentEntity {
     private String ignoreText;
 
 //    @ColumnInfo(name = "class_id")
-    private String class_id;
+    private long class_id;
 //    @ColumnInfo(name = "sex")
     private int sex;
 
     @Embedded
     public Address address;
 
+    private int age;
 
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
 
     public long getId() {
         return id;
@@ -79,14 +87,13 @@ public class StudentEntity {
         this.ignoreText = ignoreText;
     }
 
-    public String getClass_id() {
+    public long getClass_id() {
         return class_id;
     }
 
-    public void setClass_id(String class_id) {
+    public void setClass_id(long class_id) {
         this.class_id = class_id;
     }
-
 
     @Override
     public String toString() {
@@ -94,9 +101,10 @@ public class StudentEntity {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", ignoreText='" + ignoreText + '\'' +
-                ", class_id='" + class_id + '\'' +
+                ", class_id=" + class_id +
                 ", sex=" + sex +
-                ", postCode=" + address.getPostCode() +
+                ", address=" + address +
+                ", age=" + age +
                 '}';
     }
 }

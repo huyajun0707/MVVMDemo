@@ -35,5 +35,4 @@ public interface StudentDao {
     @Update
     void update(StudentEntity entity);
 
-
 }

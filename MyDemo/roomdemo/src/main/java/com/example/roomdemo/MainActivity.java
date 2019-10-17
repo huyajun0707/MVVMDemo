@@ -13,6 +13,7 @@ import android.view.View;
 
 import com.example.roomdemo.dao.RoomDemoDatabase;
 import com.example.roomdemo.entity.Address;
+import com.example.roomdemo.entity.ClassEntity;
 import com.example.roomdemo.entity.StudentEntity;
 
 import java.util.List;
@@ -40,9 +41,23 @@ public class MainActivity extends AppCompatActivity {
                     }
                 })
                 .allowMainThreadQueries()//允许在主线程查询数据
-                .addMigrations()//迁移数据库使用，下面会单独拿出来讲
+//                .setJournalMode(RoomDatabase.JournalMode.WRITE_AHEAD_LOGGING)
+                .addMigrations(MIGRATION_1_2)//迁移数据库使用，下面会单独拿出来讲
                 .fallbackToDestructiveMigration()//迁移数据库如果发生错误，将会重新创建数据库，而不是发生崩溃
                 .build();
+
+        findViewById(R.id.btInsertClass).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                for (int i = 0; i < 5; i++) {
+                    ClassEntity  classEntity = new ClassEntity();
+                    classEntity.setName("班级"+i);
+                    database.classDao().insert(classEntity);
+                }
+            }
+        });
+
+
 
         findViewById(R.id.btInsert).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,8 +69,10 @@ public class MainActivity extends AppCompatActivity {
                     num++;
                     studentEntities[i] = new StudentEntity();
                     studentEntities[i].setName("小雪"+num);
-                    studentEntities[i].setSex(i%2);
+                    studentEntities[i].setSex(i%2+1);
                     studentEntities[i].setIgnoreText("忽略"+num);
+                    studentEntities[i].setAge(num);
+                    studentEntities[i].setClass_id(i%5+1);
                     Address address= new Address();
                     address.setCity("城市"+num);
                     address.setPostCode(num);
@@ -77,6 +94,11 @@ public class MainActivity extends AppCompatActivity {
                 
             }
         });
+
+
+
+        //数据库升级
+
         
 
 
@@ -88,18 +110,17 @@ public class MainActivity extends AppCompatActivity {
     static final Migration MIGRATION_1_2 = new Migration(1, 2) {
         @Override
         public void migrate(SupportSQLiteDatabase database) {
-            database.execSQL("CREATE TABLE `Fruit` (`id` INTEGER, "
-                    + "`name` TEXT, PRIMARY KEY(`id`))");
+            database.execSQL("ALTER TABLE tb_student ADD COLUMN age INTEGER NOT NULL DEFAULT 0");
         }
     };
 
-    static final Migration MIGRATION_2_3 = new Migration(2, 3) {
-        @Override
-        public void migrate(SupportSQLiteDatabase database) {
-            database.execSQL("ALTER TABLE Book "
-                    + " ADD COLUMN pub_year INTEGER");
-        }
-    };
+//    static final Migration MIGRATION_2_3 = new Migration(2, 3) {
+//        @Override
+//        public void migrate(SupportSQLiteDatabase database) {
+//            database.execSQL("ALTER TABLE Book "
+//                    + " ADD COLUMN pub_year INTEGER");
+//        }
+//    };
 
     private void upData(){
 

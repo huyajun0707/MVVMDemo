@@ -6,10 +6,14 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".MainActivity">
-
+    <Button
+        android:id="@+id/btInsertClass"
+        android:text="插入班级"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
     <Button
         android:id="@+id/btInsert"
-        android:text="插入"
+        android:text="插入学生"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
