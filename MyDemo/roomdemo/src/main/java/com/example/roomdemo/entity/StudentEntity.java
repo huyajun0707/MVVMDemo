@@ -45,6 +45,7 @@ public class StudentEntity {
     @Embedded
     public Address address;
 
+
     private int age;
 
     public int getAge() {

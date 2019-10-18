@@ -24,25 +24,25 @@
     <autoscroll-from-editor value="true" />
     <show-object-properties value="true" />
     <loaded-nodes>
-      <connection connection-id="830b49b6-82e5-48b1-a7ea-d26a4edb79d0">
-        <schema name="main" object-types="table, column, view" />
+      <connection connection-id="8b39da18-458a-405d-b620-20c382294493">
+        <schema name="main" object-types="view, table" />
       </connection>
     </loaded-nodes>
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
-    <connection id="830b49b6-82e5-48b1-a7ea-d26a4edb79d0">
-      <console name="Connection" type="STANDARD" schema="main" session="Main"><![CDATA[--select * from tb_student
+    <connection id="8b39da18-458a-405d-b620-20c382294493">
+      <console name="Connection" type="STANDARD" schema="main" session="Main"><![CDATA[select * from tb_student
 
 --select * from tb_class
 
-select * from tb_student where class_id between 1 and 2]]></console>
+--select * from tb_student where class_id between 4 and 5]]></console>
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
     <open-files />
   </component>
   <component name="DBNavigator.Project.DatabaseSessionManager">
-    <connection id="830b49b6-82e5-48b1-a7ea-d26a4edb79d0" />
+    <connection id="8b39da18-458a-405d-b620-20c382294493" />
   </component>
   <component name="DBNavigator.Project.EditorStateManager">
     <last-used-providers />
@@ -67,7 +67,7 @@ select * from tb_student where class_id between 1 and 2]]></console>
   </component>
   <component name="DBNavigator.Project.Settings">
     <connections>
-      <connection id="830b49b6-82e5-48b1-a7ea-d26a4edb79d0" active="true">
+      <connection id="8b39da18-458a-405d-b620-20c382294493" active="true">
         <database>
           <name value="Connection" />
           <description value="" />
@@ -82,7 +82,7 @@ select * from tb_student where class_id between 1 and 2]]></console>
           <port value="1234" />
           <database value="database" />
           <files>
-            <file path="$USER_HOME$/Documents/AndroidStudio/DeviceExplorer/oppo-pcam00-29aa6443/data/data/com.example.roomdemo/databases/database_name.db" schema="main" />
+            <file path="$USER_HOME$/Documents/AndroidStudio/DeviceExplorer/oppo-pcam00-29aa6443/data/data/com.example.roomdemo/databases/databases/database_name.db" schema="main" />
           </files>
           <type value="NONE" />
           <user value="" />

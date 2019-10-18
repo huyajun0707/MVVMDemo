@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
                 })
                 .allowMainThreadQueries()//允许在主线程查询数据
 //                .setJournalMode(RoomDatabase.JournalMode.WRITE_AHEAD_LOGGING)
-                .addMigrations(MIGRATION_1_2)//迁移数据库使用，下面会单独拿出来讲
+                .addMigrations(MIGRATION_1_2)//迁移数据库使用
                 .fallbackToDestructiveMigration()//迁移数据库如果发生错误，将会重新创建数据库，而不是发生崩溃
                 .build();
 
@@ -114,6 +114,8 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
+
+
 //    static final Migration MIGRATION_2_3 = new Migration(2, 3) {
 //        @Override
 //        public void migrate(SupportSQLiteDatabase database) {
@@ -122,10 +124,5 @@ public class MainActivity extends AppCompatActivity {
 //        }
 //    };
 
-    private void upData(){
 
-        //数据库升级
-//        Room.databaseBuilder(getApplicationContext(), MyDb.class, "database-name")
-//                .addMigrations(MIGRATION_1_2, MIGRATION_2_3).build();
-    }
 }
