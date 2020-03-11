@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         X5Util.getInstance().setCommonWebChromeClient(webView, normalView);
         //TODO 设置下载监听，比如网页中包含下载的东西，可自定义下载设置
         X5Util.getInstance().setDownloadListener(this, webView);
-        webView.loadUrl("https://www.baidu.com/");
+        webView.loadUrl("https://www.cnblogs.com/kaituorensheng/p/3776527.html#ctmk");
     }
 
 

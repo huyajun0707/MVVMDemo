@@ -3,8 +3,10 @@ package com.hyj.demo.jsbridgedemo;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
+
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -17,8 +19,17 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
+import com.google.gson.ExclusionStrategy;
+import com.google.gson.FieldAttributes;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonObject;
+
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     private WebView webView;
@@ -34,7 +45,44 @@ public class MainActivity extends AppCompatActivity {
         webSettings.setJavaScriptEnabled(true);
         // 设置允许JS弹窗
         webSettings.setJavaScriptCanOpenWindowsAutomatically(true);
-        webView.loadUrl("file:///android_asset/index.html");
+
+        findViewById(R.id.btTest).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                List<Info> infos = new ArrayList<>();
+                Info info = new Info();
+                info.setId(1L);
+                info.setName("test");
+                info.setAge(10);
+                infos.add(info);
+                isString(info.getName());
+
+                ExclusionStrategy myExclusionStrategy = new ExclusionStrategy() {
+
+                    @Override
+                    public boolean shouldSkipField(FieldAttributes fa) {
+                        return fa.getName().equals("id"); //
+                    }
+
+                    @Override
+                    public boolean shouldSkipClass(Class<?> clazz) {
+                        return false;
+                    }
+
+                };
+
+                Gson gson = new GsonBuilder()
+                        .setExclusionStrategies(myExclusionStrategy) //
+                        .create();
+                String result = gson.toJson(infos);
+                Log.d("--->result", "onClick: " + result);
+
+            }
+        });
+
+
+        webView.loadUrl("https://cn.bing.com/");
 //        webView.loadUrl("https://cn.bing.com");
         findViewById(R.id.btCallJs).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,7 +96,13 @@ public class MainActivity extends AppCompatActivity {
 
                 //方式二
                 // 只需要将第一种方法的loadUrl()换成下面该方法即可
-                webView.evaluateJavascript("javascript:callJs('方式二')", new ValueCallback<String>() {
+                JSONObject jsonObject  = new JSONObject();
+                try {
+                    jsonObject.put("value","方式二");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                webView.evaluateJavascript("javascript:callJs(" + "0000" + ")", new ValueCallback<String>() {
                     @Override
                     public void onReceiveValue(String value) {
                         //此处为 js 返回的结果
@@ -149,11 +203,21 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    private void isString(Object name) {
+        Log.d("---->", "isString: " + (name instanceof String));
+
+    }
+
     //本地方法
     public class NativeJsInterface {
         @JavascriptInterface
         public void goActivity() {
             startActivity(new Intent(MainActivity.this, JsBridgeActivity.class));
+        }
+
+        @JavascriptInterface
+        public String test() {
+            return "ok";
         }
     }
 

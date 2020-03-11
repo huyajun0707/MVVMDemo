@@ -9,4 +9,9 @@
     </declare-styleable>
 
 
+    <declare-styleable name="ArcLayout">
+        <attr name="arcHeight" format="dimension" />
+    </declare-styleable>
+
+
 </resources>

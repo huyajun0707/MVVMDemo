@@ -29,11 +29,12 @@
 
 <body>
     <b>测试</b><br/>
-    <button onClick="window.android.goActivity()">
+    <button onClick="alert(window.android.test())">
     跳转Activity
     </button><br/>
     <button  onclick="callAndroid()">点击通过shouldloadurl调用Android代码</button><br/>
     <button  onclick="callAppByPrompt()">点击通过Prompt调用Android代c</button><br/>
+    <input class="upload-input"  accept="image/*" multiple required type="file" @change="chooseImg">
 <!--    <p id="content">显示返回值</p>-->
 </body>
 

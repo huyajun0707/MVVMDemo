@@ -10,20 +10,36 @@
     <!--<com.hyj.demo.viewdemo.CameraView-->
     <!--android:layout_width="match_parent"-->
     <!--android:layout_height="match_parent" />-->
-    <com.hyj.demo.viewdemo.DownloadProgressView
-        android:id="@+id/dpView"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginLeft="60dp"
-        android:layout_marginTop="60dp"
-        app:maxProgress="50"
-        app:progress="25" />
+<!--    <com.hyj.demo.viewdemo.DownloadProgressView-->
+<!--        android:id="@+id/dpView"-->
+<!--        android:layout_width="30dp"-->
+<!--        android:layout_height="30dp"-->
+<!--        android:layout_marginLeft="60dp"-->
+<!--        android:layout_marginTop="60dp"-->
+<!--        app:maxProgress="50"-->
+<!--        app:progress="25" />-->
 
-    <Button
-        android:id="@+id/btStart"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="播放"
-        android:visibility="gone" />
+<!--    <Button-->
+<!--        android:id="@+id/btStart"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="播放"-->
+<!--        android:visibility="gone" />-->
+
+<!--    <com.hyj.demo.viewdemo.ArcView-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:src="@color/colorAccent"-->
+<!--        android:layout_height="50dp"/>-->
+
+    <com.hyj.demo.viewdemo.ArcLayout
+        android:layout_width="match_parent"
+        app:arcHeight="50dp"
+        android:layout_height="match_parent">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@color/colorAccent"/>
+    </com.hyj.demo.viewdemo.ArcLayout>
+
 
 </LinearLayout>

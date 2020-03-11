@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         tools:ignore="MissingConstraints" />
 
-    <com.hyj.demo.viewdemo.MyEditText
+    <com.hyj.demo.viewdemo.SupEditText
         android:id="@+id/myEditText"
         android:hint="输入密码"
         android:layout_width="match_parent"

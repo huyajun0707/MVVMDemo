@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 public class EdittextActivity extends AppCompatActivity {
     private EditText editText;
-    private MyEditText myEditText;
+    private SupEditText myEditText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +44,7 @@ public class EdittextActivity extends AppCompatActivity {
 
             }
         });
-        myEditText.setOnFinishComposingListener(new MyEditText.OnFinishComposingListener() {
+        myEditText.setOnFinishComposingListener(new SupEditText.OnFinishComposingListener() {
             @Override
             public void finishComposing() {
                 Log.d("---->", "finishComposing: ");

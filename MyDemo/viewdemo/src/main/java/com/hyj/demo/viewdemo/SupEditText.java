@@ -17,20 +17,20 @@ import androidx.appcompat.widget.AppCompatEditText;
  * @depiction ：
  */
 @SuppressLint("AppCompatCustomView")
-public class MyEditText extends EditText {
-    public MyEditText(Context context) {
+public class SupEditText extends EditText {
+    public SupEditText(Context context) {
         super(context);
     }
 
-    public MyEditText(Context context, AttributeSet attrs) {
+    public SupEditText(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public MyEditText(Context context, AttributeSet attrs, int defStyleAttr) {
+    public SupEditText(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
 
-    public MyEditText(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public SupEditText(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
     }
 
