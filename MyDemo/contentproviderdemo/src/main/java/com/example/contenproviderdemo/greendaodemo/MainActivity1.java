@@ -1,20 +1,22 @@
-package com.hyj.demo.greendaodemo;
+package com.example.contenproviderdemo.greendaodemo;
 
-import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
-import com.hyj.demo.greendaodemo.db.DBManager;
-import com.hyj.demo.greendaodemo.entity.MovieCollect;
-import com.hyj.demo.greendaodemo.greendaodb.DaoManager;
-import com.hyj.demo.greendaodemo.greendaodb.DaoSession;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.contenproviderdemo.R;
+import com.example.contenproviderdemo.greendaodemo.db.DBManager;
+import com.example.contenproviderdemo.greendaodemo.entity.MovieCollect;
+import com.example.contenproviderdemo.greendaodemo.greendaodb.DaoManager;
+import com.example.contenproviderdemo.greendaodemo.greendaodb.DaoSession;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity1 extends AppCompatActivity implements View.OnClickListener {
     private Button btInsert, btQuery, btUpdate, btDelete;
     private DBManager dbManager;
     private DaoSession daoSession;
@@ -27,7 +29,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         daoSession = new DaoManager().getDaoSession();
         btInsert = findViewById(R.id.btInsert);
         btInsert.setOnClickListener(this);
-        btQuery = findViewById(R.id.btQquery);
+        btQuery = findViewById(R.id.btQuery);
         btQuery.setOnClickListener(this);
         btUpdate = findViewById(R.id.btUpdate);
         btUpdate.setOnClickListener(this);
@@ -77,7 +79,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
                 daoSession.getMovieCollectDao().insertInTx(movieCollects);
                 break;
-            case R.id.btQquery:
+            case R.id.btQuery:
                 List<MovieCollect> listMovieCollect = daoSession.getMovieCollectDao().loadAll();
                 for (MovieCollect movieCollect : listMovieCollect) {
                     Log.d("---->", movieCollect.toString());

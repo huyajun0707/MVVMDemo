@@ -25,16 +25,17 @@
 <!--        android:layout_height="wrap_content"-->
 <!--        android:text="播放"-->
 <!--        android:visibility="gone" />-->
-
-<!--    <com.hyj.demo.viewdemo.ArcView-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:src="@color/colorAccent"-->
-<!--        android:layout_height="50dp"/>-->
+<!--
+    <com.hyj.demo.viewdemo.AvatarView
+        android:layout_width="match_parent"
+        android:src="@color/colorAccent"
+        android:layout_height="match_parent"/>-->
 
     <com.hyj.demo.viewdemo.ArcLayout
         android:layout_width="match_parent"
+        android:background="@android:color/white"
         app:arcHeight="50dp"
-        android:layout_height="match_parent">
+        android:layout_height="300dp">
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
