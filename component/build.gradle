@@ -1,0 +1,97 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+android {
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
+
+
+    defaultConfig {
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles 'consumer-rules.pro'
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    dataBinding {
+        enabled = true
+    }
+
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    api deps.kotlin_stdlib
+    api deps.appcompat_androidx
+    api deps.androidx_core
+    testApi 'junit:junit:4.12'
+    androidTestApi 'androidx.test:runner:1.1.1'
+    androidTestApi 'androidx.test.espresso:espresso-core:3.2.0'
+    api deps.androidx_constraint
+    api deps.recyclerview
+    api deps.androidx_core
+    api deps.logger
+//    api deps.okhttp
+    api deps.converter_gson
+//    api deps.guava
+    api deps.lifecycle
+    api deps.lifecycle_runtime
+    api deps.viewmodel
+    api deps.livedata
+    api deps.bar_library
+    api deps.navigation_fragment
+    api deps.navigation_ui
+    api deps.glide
+//    api deps.gilde_compiler
+    api deps.mmkv
+    api deps.multidex
+    api 'com.gihub.network:lib-sample-net:1.1.0'
+    api deps.statusbar
+    api deps.gson
+    api deps.screen_helper
+    api deps.gson
+    api deps.weber_x5
+    api deps.weber_jsbridge
+    api deps.tbssdk
+    api deps.eventbus
+    api deps.location
+    api deps.walle
+
+    api deps.legacy
+    api deps.quickloadlayout
+    api deps.avoid_onresult
+    api deps.basepopup
+    api deps.cardview
+    api deps.material
+    api deps.smartrefreshlayout
+    api deps.flexibledivider
+    api deps.gilde_transformat
+    api deps.pickerview
+    api deps.flowlayout
+    api deps.permission
+    api deps.verificationcodeinput
+    api deps.bugly_native
+    api deps.bugly
+    api deps.multidex
+    api deps.aspectj
+    api deps.greendao
+    api deps.workmanager
+    api deps.sqlcipher
+    api deps.umsdk_analytics
+    api deps.umsdk_common
+    api deps.jpush
+    api deps.jcore
+    api deps.tinker
+    api deps.arouter_api
+
+}
