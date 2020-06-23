@@ -27,6 +27,8 @@ import com.google.gson.JsonObject;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -82,8 +84,12 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        webView.loadUrl("https://cn.bing.com/");
+//        webView.loadUrl("https://cn.bing.com/");
 //        webView.loadUrl("https://cn.bing.com");
+        webView.loadUrl("file:///android_asset/default.html");
+
+
+
         findViewById(R.id.btCallJs).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -172,6 +178,20 @@ public class MainActivity extends AppCompatActivity {
                 return true;
 
             }
+
+            @Override
+            public void onPageFinished(WebView view, String url) {
+                super.onPageFinished(view, url);
+                webView.evaluateJavascript("javascript:setImageView(\"" + "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1591790217027&di=3ca350154277cfe599783672fa2061ed&imgtype=0&src=http%3A%2F%2Fa3.att.hudong.com%2F14%2F75%2F01300000164186121366756803686.jpg" + "\")", new ValueCallback<String>() {
+                    @Override
+                    public void onReceiveValue(String value) {
+                        //此处为 js 返回的结果
+
+                    }
+                });
+
+
+            }
         });
 
         //js调用本地方法，通过prompt拦截
@@ -220,6 +240,9 @@ public class MainActivity extends AppCompatActivity {
             return "ok";
         }
     }
+
+
+
 
 
 }
