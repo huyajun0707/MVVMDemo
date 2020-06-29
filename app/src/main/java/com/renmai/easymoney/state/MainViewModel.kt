@@ -5,9 +5,9 @@ import androidx.lifecycle.ViewModel
 import androidx.databinding.ObservableField
 import androidx.lifecycle.viewModelScope
 import com.network.library.listener.ILoadingView
+import com.renmai.easymoney.entity.IndexStatus
 import com.renmai.kdemo.net.ApiService
 import com.renmai.kdemo.net.safeLoaddingLaunch
-import kotlinx.coroutines.launch
 
 
 /**
@@ -23,10 +23,21 @@ class MainViewModel(
 ) : ViewModel() {
     val name = ObservableField<String>()
 
+    fun sucess() {
+        iLoadingView.showEmpty("成功啦")
+    }
+
     fun getIndexStatus() {
-        viewModelScope.safeLoaddingLaunch(iLoadingView) {
-            name.set(ApiService.instance.getIndexStatus().data.toString())
-        }
+
+        viewModelScope.safeLoaddingLaunch<IndexStatus>(iLoadingView, {
+            name.set(ApiService.instance.getIndexStatus("http://ryh-app-test.renmaitech.com/api/indexStatus").data.toString())
+        }, {
+
+            println("--->callback:success:"+it.toString())
+        } , {
+
+            println("--->callback:failcode:"+it)
+        })
 
     }
 }

@@ -30,13 +30,22 @@ val exceptionHandler = CoroutineExceptionHandler { coroutineContext, throwable -
 private val handler = Handler(Looper.getMainLooper())
 
 //用拦截器实现code处理 并切换线程
-class NetWorkContinuationInterceptor(val view: ILoadingView?) : ContinuationInterceptor {
+class NetWorkContinuationInterceptor<T>(
+    val view: ILoadingView?,
+    val successBlock: (t: T) -> Unit,
+    val failBlock: (code: String) -> Unit
+) : ContinuationInterceptor {
     override val key = ContinuationInterceptor
-    override fun <T> interceptContinuation(continuation: Continuation<T>) =
-        NetWorkContinuation(continuation, view)
+    override fun <D> interceptContinuation(continuation: Continuation<D>) =
+        NetWorkContinuation(continuation, view, successBlock, failBlock)
 }
 
-class NetWorkContinuation<T>(val continuation: Continuation<T>, val view: ILoadingView?) :
+class NetWorkContinuation<T, D>(
+    val continuation: Continuation<T>,
+    val view: ILoadingView?,
+    val successBlock: (t: D) -> Unit,
+    val failBlock: (code: String) -> Unit
+) :
     Continuation<T> {
     override val context = continuation.context
 
@@ -51,17 +60,20 @@ class NetWorkContinuation<T>(val continuation: Continuation<T>, val view: ILoadi
                             //展示数据
                             handler.post(Runnable {
                                 continuation.resumeWith(result)
+                                successBlock.invoke(it.data as D)
                             })
                             return@resumeWith
                         } else {
                             handler.post(Runnable {
                                 view?.showFailureMessage(baseResponse.msg!!)
+                                failBlock.invoke(baseResponse.code!!)
                             })
                             return@resumeWith
                         }
                     } else {
                         //BaseResponse为空，显示获取数据失败视图
                         handler.post(Runnable {
+                            failBlock.invoke("99999")
                             view?.showFailureMessage("未获取到网络数据")
                         })
                         return@resumeWith
@@ -77,17 +89,43 @@ class NetWorkContinuation<T>(val continuation: Continuation<T>, val view: ILoadi
 }
 
 
-fun CoroutineScope.safeLoaddingLaunch(
+fun <T> CoroutineScope.safeLoaddingLaunch(
     view: ILoadingView?,
-    block: suspend () -> Unit
-): Job = launch(NetWorkContinuationInterceptor(view)) {
+    block: suspend () -> Unit,
+    successBlock: (t: T) -> Unit,
+    failBlock: (code: String) -> Unit
+): Job = launch(NetWorkContinuationInterceptor(view, successBlock, failBlock)) {
     try {
         view?.showLoading()
         block()
     } catch (e: Exception) {
-        handlerException(e, view)
+        handler.post(Runnable {
+            handlerException(e, view)
+            failBlock.invoke("99999")
+        })
     } finally {
-        view?.hideLoading()
+        handler.post(Runnable {
+            view?.hideLoading()
+        })
+    }
+}
+
+
+fun <T> CoroutineScope.safeLoaddingLaunch(
+    view: ILoadingView?,
+    block: suspend () -> Unit
+): Job = launch(NetWorkContinuationInterceptor<T>(view, {}, {})) {
+    try {
+        view?.showLoading()
+        block()
+    } catch (e: Exception) {
+        handler.post(Runnable {
+            handlerException(e, view)
+        })
+    } finally {
+        handler.post(Runnable {
+            view?.hideLoading()
+        })
     }
 }
 
@@ -95,11 +133,13 @@ fun CoroutineScope.safeLoaddingLaunch(
 fun <T> CoroutineScope.safeNoLoaddingLaunch(
     view: ILoadingView,
     block: suspend () -> Unit
-): Job = launch(NetWorkContinuationInterceptor(view)) {
+): Job = launch(NetWorkContinuationInterceptor<T>(view, {}, {})) {
     try {
         block()
     } catch (e: Exception) {
-        handlerException(e, view)
+        handler.post(Runnable {
+            handlerException(e, view)
+        })
     } finally {
     }
 

@@ -7,6 +7,7 @@ import com.renmai.easymoney.entity.IndexStatus
 import com.network.library.NetworkEngine
 import com.renmai.component.network.BaseEntity
 import retrofit2.http.GET
+import retrofit2.http.Url
 
 /**
  * @author      ： HuYajun <huyajun0707@gmail.com>
@@ -25,12 +26,10 @@ interface ApiService {
                 .build()
                 .create(ApiService::class.java)
         }
+
     }
 
-
-
-
-    @GET("api/indexStatus")
-    suspend fun getIndexStatus(): BaseEntity<IndexStatus>
+    @GET
+    suspend fun getIndexStatus(@Url url: String): BaseEntity<IndexStatus>
 
 }
