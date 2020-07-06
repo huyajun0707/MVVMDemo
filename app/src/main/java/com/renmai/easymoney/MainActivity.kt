@@ -32,7 +32,9 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
     }
 
     override fun initData() {
+        val email = "123@163.com"
 
+        println("------>"+email.substring(email.indexOf("@"), email.length))
 
     }
 

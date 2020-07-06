@@ -148,6 +148,10 @@ abstract class BaseActivity<V : ViewDataBinding> : AppCompatActivity(),
         MToast.showError(msg)
     }
 
+    override fun finishActivity() {
+        this.finish()
+    }
+
     override fun onClick(v: View?) {
         when (v?.id) {
 //            R.id.mImLeftIcon -> finish()

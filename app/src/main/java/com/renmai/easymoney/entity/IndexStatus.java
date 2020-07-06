@@ -10,22 +10,7 @@ import java.util.List;
  */
 public class IndexStatus {
 
-    @Override
-    public String toString() {
-        return "IndexStatus{" +
-                "buttonText='" + buttonText + '\'' +
-                ", buttonUrl='" + buttonUrl + '\'' +
-                ", creditAmount=" + creditAmount +
-                ", canRaiseAmount=" + canRaiseAmount +
-                ", customerPhone='" + customerPhone + '\'' +
-                ", maxAmount=" + maxAmount +
-                ", statusText='" + statusText + '\'' +
-                ", styleCode=" + styleCode +
-                ", userStatus='" + userStatus + '\'' +
-                ", withdrawId=" + withdrawId +
-                ", attachTexts=" + attachTexts +
-                '}';
-    }
+
 
     /**
      * attachTexts : ["借款10万日息低至20元","5分钟急速审批"]
@@ -52,7 +37,26 @@ public class IndexStatus {
     private int styleCode;
     private String userStatus;
     private int withdrawId;
-    private List<String> attachTexts;
+    private List<String> attachTextsDown;
+    private List<String> attachTextsUp;
+
+    @Override
+    public String toString() {
+        return "IndexStatus{" +
+                "buttonText='" + buttonText + '\'' +
+                ", buttonUrl='" + buttonUrl + '\'' +
+                ", creditAmount=" + creditAmount +
+                ", canRaiseAmount=" + canRaiseAmount +
+                ", customerPhone='" + customerPhone + '\'' +
+                ", maxAmount=" + maxAmount +
+                ", statusText='" + statusText + '\'' +
+                ", styleCode=" + styleCode +
+                ", userStatus='" + userStatus + '\'' +
+                ", withdrawId=" + withdrawId +
+                ", attachTextsDown=" + attachTextsDown +
+                ", attachTextsUp=" + attachTextsUp +
+                '}';
+    }
 
     public String getButtonText() {
         return buttonText;
@@ -134,11 +138,19 @@ public class IndexStatus {
         this.withdrawId = withdrawId;
     }
 
-    public List<String> getAttachTexts() {
-        return attachTexts;
+    public List<String> getAttachTextsDown() {
+        return attachTextsDown;
     }
 
-    public void setAttachTexts(List<String> attachTexts) {
-        this.attachTexts = attachTexts;
+    public void setAttachTextsDown(List<String> attachTextsDown) {
+        this.attachTextsDown = attachTextsDown;
+    }
+
+    public List<String> getAttachTextsUp() {
+        return attachTextsUp;
+    }
+
+    public void setAttachTextsUp(List<String> attachTextsUp) {
+        this.attachTextsUp = attachTextsUp;
     }
 }

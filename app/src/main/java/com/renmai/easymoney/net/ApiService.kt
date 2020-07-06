@@ -30,6 +30,6 @@ interface ApiService {
     }
 
     @GET
-    suspend fun getIndexStatus(@Url url: String): BaseEntity<IndexStatus>
+    suspend fun <T> getIndexStatus(@Url url: String): BaseEntity<T>
 
 }

@@ -11,6 +11,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.*
 import org.jetbrains.annotations.NotNull
 import androidx.appcompat.app.AppCompatActivity
+import com.network.library.listener.ILoadingView
+import com.renmai.component.utils.MToast
 
 
 /**
@@ -21,7 +23,7 @@ import androidx.appcompat.app.AppCompatActivity
  */
 
 abstract class BaseFragment<V : ViewDataBinding> : Fragment(),
-    View.OnClickListener {
+    View.OnClickListener, ILoadingView {
 
 
     protected var mActivity: AppCompatActivity? = null
@@ -220,25 +222,28 @@ abstract class BaseFragment<V : ViewDataBinding> : Fragment(),
     protected abstract fun destroyViewAndThing()
 
 
-    fun showLoading() {
-    }
-
-    fun hideLoading() {
-    }
-
-    fun showToast(msg: String) {
+    override fun showLoading() {
 
     }
 
-    fun showEmpty(msg: String?) {
+    override fun hideLoading() {
 
     }
 
-    fun showFailureMessage(msg: String) {
+    override fun showEmpty(msg: String?) {
+        MToast.showNormal(msg!!)
     }
 
-    fun showErrorMessage(msg: String) {
+    override fun showFailureMessage(msg: String) {
+        MToast.showError(msg)
+    }
 
+    override fun showErrorMessage(msg: String) {
+        MToast.showError(msg)
+    }
+
+    override fun finishActivity() {
+        activity?.finish()
     }
 
 

@@ -5,6 +5,8 @@ import android.os.Looper
 import com.google.gson.JsonParseException
 import com.network.library.listener.ILoadingView
 import com.renmai.component.network.BaseEntity
+import com.renmai.component.utils.GsonUtils
+import com.renmai.component.utils.ReflectionUtils
 import kotlinx.coroutines.*
 import org.json.JSONException
 import retrofit2.HttpException
@@ -32,17 +34,19 @@ private val handler = Handler(Looper.getMainLooper())
 //用拦截器实现code处理 并切换线程
 class NetWorkContinuationInterceptor<T>(
     val view: ILoadingView?,
+    val clazz: Class<T>,
     val successBlock: (t: T) -> Unit,
     val failBlock: (code: String) -> Unit
 ) : ContinuationInterceptor {
     override val key = ContinuationInterceptor
     override fun <D> interceptContinuation(continuation: Continuation<D>) =
-        NetWorkContinuation(continuation, view, successBlock, failBlock)
+        NetWorkContinuation<D, T>(continuation, view, clazz, successBlock, failBlock)
 }
 
 class NetWorkContinuation<T, D>(
     val continuation: Continuation<T>,
     val view: ILoadingView?,
+    val clazz: Class<D>,
     val successBlock: (t: D) -> Unit,
     val failBlock: (code: String) -> Unit
 ) :
@@ -53,13 +57,15 @@ class NetWorkContinuation<T, D>(
         result.onSuccess { it ->
             if (it != null) {
                 try {
-                    var baseResponse = it as BaseEntity<*>
+                    var baseResponse = it as BaseEntity<D>
                     if (baseResponse != null) {
-                        println("--->code:${baseResponse.code}")
+                        println("--->code:${baseResponse.data.toString()}")
                         if (baseResponse.code.equals("200")) {
                             //展示数据
+                            println("--->clazz:" + NetWorkContinuation@ this.javaClass.name)
                             handler.post(Runnable {
                                 continuation.resumeWith(result)
+//                                var result = GsonUtils.getModel(it.toString(), clazz)
                                 successBlock.invoke(it.data as D)
                             })
                             return@resumeWith
@@ -91,10 +97,11 @@ class NetWorkContinuation<T, D>(
 
 fun <T> CoroutineScope.safeLoaddingLaunch(
     view: ILoadingView?,
+    clazz: Class<T>,
     block: suspend () -> Unit,
     successBlock: (t: T) -> Unit,
     failBlock: (code: String) -> Unit
-): Job = launch(NetWorkContinuationInterceptor(view, successBlock, failBlock)) {
+): Job = launch(NetWorkContinuationInterceptor(view, clazz, successBlock, failBlock)) {
     try {
         view?.showLoading()
         block()
@@ -113,8 +120,30 @@ fun <T> CoroutineScope.safeLoaddingLaunch(
 
 fun <T> CoroutineScope.safeLoaddingLaunch(
     view: ILoadingView?,
+    clazz: Class<T>,
+    block: suspend () -> Unit,
+    successBlock: (t: T) -> Unit
+): Job = launch(NetWorkContinuationInterceptor(view,clazz, successBlock, {})) {
+    try {
+        view?.showLoading()
+        block()
+    } catch (e: Exception) {
+        handler.post(Runnable {
+            handlerException(e, view)
+        })
+    } finally {
+        handler.post(Runnable {
+            view?.hideLoading()
+        })
+    }
+}
+
+
+fun <T> CoroutineScope.safeLoaddingLaunch(
+    view: ILoadingView?,
+    clazz: Class<T>,
     block: suspend () -> Unit
-): Job = launch(NetWorkContinuationInterceptor<T>(view, {}, {})) {
+): Job = launch(NetWorkContinuationInterceptor(view, clazz,{}, {})) {
     try {
         view?.showLoading()
         block()
@@ -132,8 +161,9 @@ fun <T> CoroutineScope.safeLoaddingLaunch(
 
 fun <T> CoroutineScope.safeNoLoaddingLaunch(
     view: ILoadingView,
+    clazz: Class<T>,
     block: suspend () -> Unit
-): Job = launch(NetWorkContinuationInterceptor<T>(view, {}, {})) {
+): Job = launch(NetWorkContinuationInterceptor<T>(view,clazz, {}, {})) {
     try {
         block()
     } catch (e: Exception) {
