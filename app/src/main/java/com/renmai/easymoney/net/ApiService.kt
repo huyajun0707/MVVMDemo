@@ -1,11 +1,13 @@
 package com.renmai.kdemo.net
 
+import com.google.gson.JsonObject
 import com.renmai.base.BaseApplication
 import com.renmai.utils.UserUtils
 import com.renmai.easymoney.BuildConfig
 import com.renmai.easymoney.entity.IndexStatus
 import com.network.library.NetworkEngine
 import com.renmai.component.network.BaseEntity
+import org.json.JSONObject
 import retrofit2.http.GET
 import retrofit2.http.Url
 
@@ -30,6 +32,6 @@ interface ApiService {
     }
 
     @GET
-    suspend fun <T> getIndexStatus(@Url url: String): BaseEntity<T>
+    suspend fun getIndexStatus(@Url url: String): BaseEntity<JsonObject>
 
 }

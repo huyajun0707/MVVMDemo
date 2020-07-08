@@ -30,7 +30,7 @@ class MainViewModel(
     fun getIndexStatus() {
 
         viewModelScope.safeLoaddingLaunch<IndexStatus>(iLoadingView, IndexStatus::class.java, {
-            name.set(ApiService.instance.getIndexStatus<IndexStatus>("http://ryh-app-test.renmaitech.com/api/indexStatus").data.toString())
+            name.set(ApiService.instance.getIndexStatus("http://ryh-app-test.renmaitech.com/api/indexStatus").data.toString())
         }, {
 
             println("--->callback:success:" + it.toString())

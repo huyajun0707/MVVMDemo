@@ -9,6 +9,7 @@ import com.renmai.component.utils.GsonUtils
 import com.renmai.component.utils.ReflectionUtils
 import kotlinx.coroutines.*
 import org.json.JSONException
+import org.json.JSONObject
 import retrofit2.HttpException
 import java.io.InterruptedIOException
 import java.net.ConnectException
@@ -57,7 +58,7 @@ class NetWorkContinuation<T, D>(
         result.onSuccess { it ->
             if (it != null) {
                 try {
-                    var baseResponse = it as BaseEntity<D>
+                    var baseResponse = it as BaseEntity<*>
                     if (baseResponse != null) {
                         println("--->code:${baseResponse.data.toString()}")
                         if (baseResponse.code.equals("200")) {
@@ -65,8 +66,11 @@ class NetWorkContinuation<T, D>(
                             println("--->clazz:" + NetWorkContinuation@ this.javaClass.name)
                             handler.post(Runnable {
                                 continuation.resumeWith(result)
-//                                var result = GsonUtils.getModel(it.toString(), clazz)
-                                successBlock.invoke(it.data as D)
+                                it.data?.let {
+                                    var result = GsonUtils.getModel(baseResponse.data.toString(),clazz)
+                                    successBlock.invoke(result as D)
+                                }
+
                             })
                             return@resumeWith
                         } else {
@@ -123,7 +127,7 @@ fun <T> CoroutineScope.safeLoaddingLaunch(
     clazz: Class<T>,
     block: suspend () -> Unit,
     successBlock: (t: T) -> Unit
-): Job = launch(NetWorkContinuationInterceptor(view,clazz, successBlock, {})) {
+): Job = launch(NetWorkContinuationInterceptor(view, clazz, successBlock, {})) {
     try {
         view?.showLoading()
         block()
@@ -143,7 +147,7 @@ fun <T> CoroutineScope.safeLoaddingLaunch(
     view: ILoadingView?,
     clazz: Class<T>,
     block: suspend () -> Unit
-): Job = launch(NetWorkContinuationInterceptor(view, clazz,{}, {})) {
+): Job = launch(NetWorkContinuationInterceptor(view, clazz, {}, {})) {
     try {
         view?.showLoading()
         block()
@@ -163,7 +167,7 @@ fun <T> CoroutineScope.safeNoLoaddingLaunch(
     view: ILoadingView,
     clazz: Class<T>,
     block: suspend () -> Unit
-): Job = launch(NetWorkContinuationInterceptor<T>(view,clazz, {}, {})) {
+): Job = launch(NetWorkContinuationInterceptor<T>(view, clazz, {}, {})) {
     try {
         block()
     } catch (e: Exception) {

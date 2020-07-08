@@ -1,6 +1,10 @@
 package com.renmai.easymoney
 
 import android.view.View
+import androidx.core.view.doOnLayout
+import androidx.recyclerview.widget.RecyclerView
+import com.google.gson.JsonArray
+import com.google.gson.JsonObject
 import com.renmai.component.base.BaseActivity
 import com.renmai.component.base.DataBindingConfig
 import com.renmai.easymoney.databinding.ActivityMainBinding
@@ -33,7 +37,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
 
     override fun initData() {
         val email = "123@163.com"
-
+        println("------>"+email.substring(0, email.indexOf("@")))
         println("------>"+email.substring(email.indexOf("@"), email.length))
 
     }
@@ -43,6 +47,12 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
     }
 
     override fun normalOnClick(v: View?) {
+       var jsonObject: JsonObject
+        var jsonArray:JsonArray
+
+        var  recyclerView:RecyclerView
+        recyclerView.doOnLayout {  }
+        recyclerView.notifySubtreeAccessibilityStateChanged()
 
     }
 
