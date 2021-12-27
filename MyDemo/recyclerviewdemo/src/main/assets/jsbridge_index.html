@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head> <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>js交互演示</title>
+</head>
+
+<body>
+   <br/>
+    <button  onclick="callApp()">点击通过jsbridge调用Android代码</button><br/>
+<!--    <p id="content">显示返回值</p>-->
+</body>
+
+<!--JS代码-->
+<script>
+     function callApp() {
+            //call native method
+            window.WebViewJavascriptBridge.callHandler(
+                'callApp'
+                , {'param': '测试'}
+                , function(responseData) {
+                     console.log('---->', 'js调用Android成功！'+responseData);
+                     alert("js调用Android成功！!!"+responseData);
+                }
+            );
+        }
+
+
+
+
+     function connectWebViewJavascriptBridge(callback) {
+            if (window.WebViewJavascriptBridge) {
+                callback(WebViewJavascriptBridge)
+            } else {
+                document.addEventListener(
+                    'WebViewJavascriptBridgeReady'
+                    , function() {
+                        callback(WebViewJavascriptBridge)
+                    },
+                    false
+                );
+            }
+        }
+
+        connectWebViewJavascriptBridge(function(bridge) {
+            bridge.init(function(message, responseCallback) {
+                console.log('JS got a message', message);
+                var data = {
+                    'Javascript Responds': '测试中文!'
+                };
+
+                if (responseCallback) {
+                    console.log('JS responding with', data);
+                    responseCallback(data);
+                }
+            });
+
+            bridge.registerHandler("callJs", function(data, responseCallback) {
+                 alert("Android调用了JS的callJS方法！!!"+data);
+                if (responseCallback) {
+                    var responseData = "calljs 调用成功啦!";
+                    responseCallback(responseData);
+                }
+            });
+        })
+	</script>
+</html>

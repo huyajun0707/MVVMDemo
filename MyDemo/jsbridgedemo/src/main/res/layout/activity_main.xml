@@ -11,26 +11,32 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
+
         <Button
             android:id="@+id/btCallJs"
-            android:text="CallJs"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="CallJs"
             tools:ignore="OnClick" />
+
         <Button
             android:id="@+id/btTest"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="test"/>
+            android:text="test" />
     </LinearLayout>
 
-    <WebView
-        android:id="@+id/webview"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+<!--    <ScrollView-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="500dp">-->
 
-    </WebView>
+        <WebView
+            android:id="@+id/webview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
+        </WebView>
 
+<!--    </ScrollView>-->
 
 </LinearLayout>

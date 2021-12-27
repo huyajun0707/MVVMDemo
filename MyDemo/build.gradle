@@ -3,20 +3,25 @@
 buildscript {
 
     repositories {
-        google()
+//        google()
 //        jcenter()
+        maven { url 'https://maven.aliyun.com/repository/google/' }
 //        maven { url 'https://maven.google.com' }
         maven{ url  "http://maven.aliyun.com/nexus/content/groups/public/" }
         maven{ url'http://maven.aliyun.com/nexus/content/repositories/jcenter'}
+//        maven{
+//            url "file:///Users/admin/Downloads/download/github/repo"
+//        }
 
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.5.0'
+        classpath 'com.android.tools.build:gradle:4.0.1'
         //用于分享
-        classpath 'com.mob.sdk:MobSDK:+'
+//        classpath 'com.mob.sdk:MobSDK:+'
 
-        classpath 'org.greenrobot:greendao-gradle-plugin:3.2.2' // add greendao
+        classpath 'org.greenrobot:greendao-gradle-plugin:3.3.0' // add greendao
 
+//        classpath "io.github.froyohuang:replugin-plugin-gradle-androidx:2.3.3.0"
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
@@ -24,13 +29,18 @@ buildscript {
 
 allprojects {
     repositories {
-        google()
+//        google()
+        maven { url 'https://maven.aliyun.com/repository/google/' }
 //        jcenter()
         maven {url "https://jitpack.io" }
         maven{ url  "http://maven.aliyun.com/nexus/content/groups/public/" }
         maven{ url'http://maven.aliyun.com/nexus/content/repositories/jcenter'}
         // maven for kodein
         maven { url 'https://dl.bintray.com/kodein-framework/Kodein-DI/' }
+
+        maven{
+            url "file:///Users/admin/Downloads/download/github/repo"
+        }
 
     }
 }

@@ -23,7 +23,7 @@
             android:authorities="${applicationId}.TestProvider"
             android:enabled="true"
             android:process="com.example.contenproviderdemo.process"
-            android:exported="false" />
+            android:exported="true" />
     </application>
 
 </manifest>

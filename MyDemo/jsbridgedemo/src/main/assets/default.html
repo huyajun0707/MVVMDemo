@@ -23,8 +23,10 @@
     </style>
     <script>
         function setImageView(str){
-            alert("Android调用了JS的callJS方法！来自"+str);
+<!--            alert("Android调用了JS的callJS方法！来自"+str);-->
             document.getElementById("imageView").setAttribute("src",str)
+
+            document.getElementById("imageView3").setAttribute("src",null)
         }
 
 
@@ -32,5 +34,10 @@
 </head>
 <body>
 <img id="imageView" src="ce1eS1G6PUTg.jpg">
+<img id="imageView1" src="ce1eS1G6PUTg.jpg">
+<img id="imageView2" src="ce1eS1G6PUTg.jpg">
+<img id="imageView3" src="ce1eS1G6PUTg.jpg">
+<img id="imageView4" src="ce1eS1G6PUTg.jpg">
+<img id="imageView5" src="ce1eS1G6PUTg.jpg">
 </body>
 </html>

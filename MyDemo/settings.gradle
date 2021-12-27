@@ -1,3 +1,3 @@
-
+include ':viewpager2demo'
 include ':app', ':viewdemo', ':recyclerviewdemo', ':toolbardemo', ':jsbridgedemo', ':animation', ':materialedittext', ':toucheventdemo', ':processdemo', ':rxjavademo', ':sharedemo', ':x5demo', ':dialogview', ':hongbaodemo', ':viewpagerdemo', ':jsbridgelibrary', ':roomdemo', ':kodeindemo', ':greendaodemo', ':contentproviderdemo'//, ':pathdemo', ':X5WebDemo',':greendaodemo'
 

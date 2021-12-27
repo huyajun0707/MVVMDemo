@@ -5,6 +5,7 @@ import android.content.ContentValues;
 import android.content.UriMatcher;
 import android.database.Cursor;
 import android.net.Uri;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -48,9 +49,10 @@ public class TestProvider extends ContentProvider {
         Cursor cursor = null;
         switch (buildUriMatcher().match(uri)) {
             case QUERY:
+                Log.d("------>","query");
 //                cursor = daoManager.getDaoSession().getMovieCollectDao().();
-                String sql = "select * from MOVIECOLLECT";
-                cursor = daoManager.getDaoSession().getDatabase().rawQuery(sql, null);
+//                String sql = "select * from MOVIECOLLECT";
+//                cursor = daoManager.getDaoSession().getDatabase().rawQuery(sql, null);
                 break;
         }
 
@@ -76,13 +78,13 @@ public class TestProvider extends ContentProvider {
 //                student.sex = values.getAsBoolean("sex");
 //                student.info = values.getAsString("info");
 //                dbManager.add(student);
-                MovieCollect movieCollect = new MovieCollect();
-                movieCollect.setMovieImage(values.getAsString("movieImage"));
-                movieCollect.setTitle(values.getAsString("title"));
-                movieCollect.setYear(values.getAsInteger("year"));
-
-                daoManager.getDaoSession().getMovieCollectDao().insertInTx(movieCollect);
-
+//                MovieCollect movieCollect = new MovieCollect();
+//                movieCollect.setMovieImage(values.getAsString("movieImage"));
+//                movieCollect.setTitle(values.getAsString("title"));
+//                movieCollect.setYear(values.getAsInteger("year"));
+//
+//                daoManager.getDaoSession().getMovieCollectDao().insertInTx(movieCollect);
+                Log.d("------>","insert");
                 break;
         }
         return null;

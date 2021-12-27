@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+         *{
+            margin: 0;
+            padding: 0;
+        }
+        body{
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+        }
+        img{
+            max-width: 100%;
+
+        }
+
+
+
+    </style>
+    <script>
+        function setImageView(str){
+<!--            alert("Android调用了JS的callJS方法！来自"+str);-->
+            document.getElementById("imageView").setAttribute("src",str)
+
+            document.getElementById("imageView3").setAttribute("src",null)
+        }
+
+
+    </script>
+</head>
+<body>
+<img id="imageView" src="ce1eS1G6PUTg.jpg">
+<img id="imageView1" src="ce1eS1G6PUTg.jpg">
+<img id="imageView2" src="ce1eS1G6PUTg.jpg">
+<img id="imageView3" src="ce1eS1G6PUTg.jpg">
+<img id="imageView4" src="ce1eS1G6PUTg.jpg">
+<img id="imageView5" src="ce1eS1G6PUTg.jpg">
+</body>
+</html>

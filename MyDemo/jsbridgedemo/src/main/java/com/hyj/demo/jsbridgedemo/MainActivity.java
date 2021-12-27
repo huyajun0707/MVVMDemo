@@ -2,12 +2,14 @@ package com.hyj.demo.jsbridgedemo;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Picture;
 import android.net.Uri;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.webkit.JavascriptInterface;
@@ -18,6 +20,7 @@ import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.Toast;
 
 import com.google.gson.ExclusionStrategy;
 import com.google.gson.FieldAttributes;
@@ -128,17 +131,17 @@ public class MainActivity extends AppCompatActivity {
         webView.setWebChromeClient(new WebChromeClient() {
             @Override
             public boolean onJsAlert(WebView view, String url, String message, final JsResult result) {
-                AlertDialog.Builder aletDialogBuilder = new AlertDialog.Builder(MainActivity.this);
-                aletDialogBuilder.setTitle("Alert");
-                aletDialogBuilder.setMessage(message);
-                aletDialogBuilder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        result.confirm();
-                    }
-                });
-                aletDialogBuilder.setCancelable(false);
-                aletDialogBuilder.create().show();
+//                AlertDialog.Builder aletDialogBuilder = new AlertDialog.Builder(MainActivity.this);
+//                aletDialogBuilder.setTitle("Alert");
+//                aletDialogBuilder.setMessage(message);
+//                aletDialogBuilder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//                        result.confirm();
+//                    }
+//                });
+//                aletDialogBuilder.setCancelable(false);
+//                aletDialogBuilder.create().show();
                 return true;
             }
 
@@ -180,7 +183,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onPageFinished(WebView view, String url) {
+            public void onPageFinished(final WebView view, String url) {
                 super.onPageFinished(view, url);
                 webView.evaluateJavascript("javascript:setImageView(\"" + "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1591790217027&di=3ca350154277cfe599783672fa2061ed&imgtype=0&src=http%3A%2F%2Fa3.att.hudong.com%2F14%2F75%2F01300000164186121366756803686.jpg" + "\")", new ValueCallback<String>() {
                     @Override
@@ -189,8 +192,40 @@ public class MainActivity extends AppCompatActivity {
 
                     }
                 });
+                view.post(new Runnable() {
+                  @Override
+                  public void run() {
+//                      int  height = (int) (view.getContentHeight());//得到的是网页在手机上真实的高度
+//                      int  height=  webView.getMeasuredHeight();
+                      int  height=  webView.getHeight();
+                      Log.d("----->webview", "onPageFinished: "+height);
+                  }
+              });
+
+//                new Handler().postDelayed(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        int contentHeight = webView.getContentHeight();
+//                        int viewHeight = webView.getHeight();
+//                        Toast.makeText(MainActivity.this, "*** " + contentHeight + " - " + viewHeight, Toast.LENGTH_SHORT).show();
+//
+//                        Log.d("--->", "run: contentHeight:"+contentHeight+",viewHeight:"+viewHeight);
+//                    }
+//                }, 500);
+            }
+        });
 
 
+
+
+        webView.setPictureListener(new WebView.PictureListener() {
+            int previousHeight;
+            @Override
+            public void onNewPicture(WebView w, Picture p) {
+                int height = w.getContentHeight();
+                if (previousHeight == height) return;
+                previousHeight = height;
+                Log.d("--->", "WebView getContentHeight" + height);
             }
         });
 
